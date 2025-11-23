@@ -1,4 +1,6 @@
-﻿namespace emoji_list_downloader.downloader;
+﻿using System.Text;
+
+namespace emoji_list_downloader.downloader;
 
 class Program {
     
@@ -11,5 +13,16 @@ class Program {
         var extractor = new EmojiExtractor();
         List<Emoji> emojis = extractor.scrapeWikiEmojis();
         Console.WriteLine("Emoji count: " + emojis.Count);
+        writeEmojisToJSFile(emojis);
+    }
+
+    // [emoji, unicode_name, aliases...]
+    static void writeEmojisToJSFile(List<Emoji> emojis) {
+        var code = new StringBuilder();
+        code.Append("let emojis = [\n");
+        foreach (Emoji emoji in emojis) {
+            code.Append("[\"" + emoji.character + "\", \"" + emoji.name + "\"],\n");
+        }
+        File.WriteAllText("emojis.js", code.ToString());
     }
 }
