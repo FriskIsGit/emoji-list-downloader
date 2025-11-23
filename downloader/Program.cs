@@ -23,6 +23,8 @@ class Program {
         foreach (Emoji emoji in emojis) {
             code.Append("[\"" + emoji.character + "\", \"" + emoji.name + "\"],\n");
         }
+
+        code.Append("]\n");
         File.WriteAllText("emojis.js", code.ToString());
     }
 }
