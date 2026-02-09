@@ -28,7 +28,7 @@ public class EmojiExtractor {
             }
 
             string emojiChar = doc.ExtractText(spans[0]);
-            string emojiName = doc.ExtractText(spans[1]);
+            string emojiName = doc.ExtractText(spans[1]).Trim();
             Console.WriteLine(emojiChar + " " + emojiName + " length=" + emojiChar.Length);
                 
             Emoji emoji = new Emoji(emojiChar, emojiName);
