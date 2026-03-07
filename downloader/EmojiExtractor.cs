@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Web;
 using WebScrapper.scrapper;
 
 namespace emoji_list_downloader.downloader; 
@@ -28,7 +29,7 @@ public class EmojiExtractor {
             }
 
             string emojiChar = doc.ExtractText(spans[0]);
-            string emojiName = doc.ExtractText(spans[1]).Trim();
+            string emojiName = HttpUtility.HtmlDecode(doc.ExtractText(spans[1]).Trim());
             Console.WriteLine(emojiChar + " " + emojiName + " length=" + emojiChar.Length);
                 
             Emoji emoji = new Emoji(emojiChar, emojiName);
